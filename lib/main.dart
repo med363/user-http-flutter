@@ -13,6 +13,17 @@ void main(){
       ));
 
 }
+/*add class user contain all information about it*/
+class User{
+  /*declare les attributs*/
+  String fullname,username,imageUrl;
+  /*constructor*/
+  User(
+      this.fullname,
+      this.imageUrl,
+      this.username
+      );
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -22,14 +33,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   List users = [];
 
   @override
   void initState(){
-    users = [
+    /*users = [
       'maisem',
       'med aziz',
       'med salmen'
+    ];*/
+    /*declare list of various users*/
+    users = [
+      User('maisem bent fouleen', '', 'maisem'),
+      User('med aziz ben fouleen', '', 'med aziz'),
+      User('med salmen ben fouleen', '', 'med salmen')
     ];
     super.initState() ;
 
@@ -40,7 +58,8 @@ class _MyAppState extends State<MyApp> {
         title: Text("list of users"),
       ),
       body: ListView.builder(itemCount: users.length,itemBuilder: (BuildContext context,int index){
-        return Dismissible(key:Key(users[index]),
+        /*declare qui va affiche fullname ou bien username*/
+        return Dismissible(key:Key(users[index].fullname),
           background: Container(
             alignment: AlignmentDirectional.centerEnd,
             color: Colors.red,
@@ -56,11 +75,12 @@ class _MyAppState extends State<MyApp> {
             shadowColor: Colors.black,
             margin: EdgeInsets.all(8),
             shape:RoundedRectangleBorder( borderRadius: BorderRadius.circular(8)),
-            child: ListTile(title:Text(users[index]),
+            /*declare qui va affiche fullname ou bien username*/
+            child: ListTile(title:Text(users[index].fullname),
               trailing: IconButton(icon: Icon(Icons.delete,color: Colors.blue,),onPressed: ()=>{
                 setState(()=>users.removeAt(index))
               },),
-              subtitle: Text('subtitle'),
+              subtitle: Text(users[index].username),
               leading:Icon(Icons.supervised_user_circle),
             ),
 
